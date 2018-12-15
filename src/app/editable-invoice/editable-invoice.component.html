@@ -1,0 +1,23 @@
+
+<td *ngIf="!editable">{{invoice.id_invoice}}</td>
+<td *ngIf="!editable">{{invoice.id_project}}</td>
+<td *ngIf="!editable">{{invoice.supplier[0]}}</td>
+<td *ngIf="!editable">{{invoice.supplier[1]}}</td>
+<td *ngIf="!editable">{{invoice.supplier[2]}}</td>
+<td *ngIf="!editable">{{invoice.description}}</td>
+<td *ngIf="!editable">{{invoice.amount}}</td>
+<td *ngIf="!editable">{{invoice.state}}</td>
+<td *ngIf="!editable">{{invoice.id_credit}}</td>
+
+<td *ngIf="editable"><input [(ngModel)]="invoice.id_invoice"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.id_project"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.supplier[0]"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.supplier[1]"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.supplier[2]"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.description"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.amount"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.state"/></td>
+<td *ngIf="editable"><input [(ngModel)]="invoice.id_credit"/></td>
+
+
+<td><button class="btn" (click)="onEdit()">{{editable ? 'Save': 'Edit'}}</button></td>
