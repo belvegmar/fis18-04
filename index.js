@@ -6,7 +6,7 @@ var cors = require("cors");
 var path = require('path')
 const INVOICES_APP_DIR = "/dist/invoices-app";
 
-var PORT = 3000;
+var PORT = (process.env.PORT || 3000);
 var BASE_URL = "/api/v1";
 var dbFileName = __dirname + "/invoices.json";
 
