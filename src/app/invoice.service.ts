@@ -64,7 +64,7 @@ export class InvoiceService {
 
   deleteInvoice(invoice: Invoice): Observable<any> {
     let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
-    const url = `${this.serveUrl}/invoices`;
+    const url = `${this.serveUrl}/invoices/${invoice.id_invoice}`;
     return this.httpClient.delete(url, {responseType: 'text', headers: headers})
     .pipe(
           tap(() => this.log(`delete invoice id =${invoice.id_invoice}`)),

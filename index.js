@@ -74,7 +74,7 @@ app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     var id_invoice = req.params.id_invoice;
     console.log(Date() + " - GET /invoices/" + id_invoice);
 
-    db.find({ "id_invoice": id_invoice }, (err, invoices) => {
+    db.find({ id_invoice: "id_invoice" }, (err, invoices) => {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -102,11 +102,11 @@ app.put(BASE_URL + "/invoices", (req, res) => {
 
 
 //error put
-app.put(BASE_URL + "/invoice/:id_ticket", (req, res) => {
+app.put(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     //update invoice
     var id_invoice = req.params.id_invoice;
     var updatedInvoice = req.body;
-    console.log(Date() + " - PUT /invoice/" + id_invoice);
+    console.log(Date() + " - PUT /invoices/" + id_invoice);
 
     if (id_invoice != updatedInvoide.id_invoice) {
         res.sendStatus(409);
@@ -141,7 +141,7 @@ app.post(BASE_URL + "/invoices", (req, res) => {
     res.sendStatus(201);
 });
 
-app.post(BASE_URL + "/contacts/:id_invoice", (req, res) => {
+app.post(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     // Forbidden
     console.log(Date() + " - POST /invoices");
     res.sendStatus(405);
@@ -158,10 +158,10 @@ app.delete(BASE_URL + "/invoices", (req, res) => {
 });
 
 
-app.delete(BASE_URL + "/invoice/:id_invoice", (req, res) => {
+app.delete(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     // Delete a single invoice
     var id_invoice = req.params.id_invoice;
-    console.log(Date() + " - DELETE /invoice/" + id_invoice);
+    console.log(Date() + " - DELETE /invoices/" + id_invoice);
 
     db.remove({ "id_invoice": id_invoice }, {}, (err, numRemoved) => {
         if (err) {

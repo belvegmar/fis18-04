@@ -24,7 +24,7 @@ export class EditableInvoiceComponent implements OnInit {
   }
 
   deleteInvoice(): void{
-    this.invoiceService.deleteInvoice(this.invoice);
+    this.invoiceService.deleteInvoice(this.invoice).subscribe();
   }
 
 

@@ -41,7 +41,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<!--The content below is only a placeholder and can be replaced.-->\n  <h1>\n    {{ title }}!\n  </h1>\n  <app-invoices></app-invoices>\n\n\n"
+module.exports = "<!--The content below is only a placeholder and can be replaced.-->\r\n  <h1>\r\n    {{ title }}!\r\n  </h1>\r\n  <app-invoices></app-invoices>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -147,7 +147,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\n<td *ngIf=\"!editable\">{{invoice.id_invoice}}</td>\n<td *ngIf=\"!editable\">{{invoice.id_project}}</td>\n<td *ngIf=\"!editable\">{{invoice.supplier[0]}}</td>\n<td *ngIf=\"!editable\">{{invoice.supplier[1]}}</td>\n<td *ngIf=\"!editable\">{{invoice.supplier[2]}}</td>\n<td *ngIf=\"!editable\">{{invoice.description}}</td>\n<td *ngIf=\"!editable\">{{invoice.amount}}</td>\n<td *ngIf=\"!editable\">{{invoice.state}}</td>\n<td *ngIf=\"!editable\">{{invoice.id_credit}}</td>\n\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_invoice\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_project\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[0]\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[1]\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[2]\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.description\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.amount\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.state\"/></td>\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_credit\"/></td>\n\n\n<td><button class=\"btn\" (click)=\"onEdit()\">{{editable ? 'Save': 'Edit'}}</button></td>"
+module.exports = "\r\n<td *ngIf=\"!editable\">{{invoice.id_invoice}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_project}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier[0]}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier[1]}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier[2]}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.description}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.amount}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.state}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_credit}}</td>\r\n\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_invoice\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_project\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[0]\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[1]\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[2]\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.description\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.amount\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.state\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_credit\"/></td>\r\n\r\n\r\n<td><button class=\"btn\" (click)=\"onEdit()\">{{editable ? 'Save': 'Edittt'}}</button></td>\r\n<td><button class=\"btn\" (click)=\"deleteInvoice()\">Delete</button></td>"
 
 /***/ }),
 
@@ -164,15 +164,28 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _invoices_invoice__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../invoices/invoice */ "./src/app/invoices/invoice.ts");
+/* harmony import */ var _invoice_service__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../invoice.service */ "./src/app/invoice.service.ts");
+
 
 
 
 var EditableInvoiceComponent = /** @class */ (function () {
-    function EditableInvoiceComponent() {
+    function EditableInvoiceComponent(invoiceService) {
+        this.invoiceService = invoiceService;
         this.editable = false;
     }
     EditableInvoiceComponent.prototype.onEdit = function () {
-        this.editable = !this.editable;
+        var _this = this;
+        if (this.editable) {
+            this.invoiceService.updateInvoice(this.invoice)
+                .subscribe(function () { return _this.editable = !_this.editable; });
+        }
+        else {
+            this.editable = !this.editable;
+        }
+    };
+    EditableInvoiceComponent.prototype.deleteInvoice = function () {
+        this.invoiceService.deleteInvoice(this.invoice).subscribe();
     };
     EditableInvoiceComponent.prototype.ngOnInit = function () {
     };
@@ -186,7 +199,7 @@ var EditableInvoiceComponent = /** @class */ (function () {
             template: __webpack_require__(/*! ./editable-invoice.component.html */ "./src/app/editable-invoice/editable-invoice.component.html"),
             styles: [__webpack_require__(/*! ./editable-invoice.component.css */ "./src/app/editable-invoice/editable-invoice.component.css")]
         }),
-        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [])
+        tslib__WEBPACK_IMPORTED_MODULE_0__["__metadata"]("design:paramtypes", [_invoice_service__WEBPACK_IMPORTED_MODULE_3__["InvoiceService"]])
     ], EditableInvoiceComponent);
     return EditableInvoiceComponent;
 }());
@@ -208,6 +221,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var tslib__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! tslib */ "./node_modules/tslib/tslib.es6.js");
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_common_http__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @angular/common/http */ "./node_modules/@angular/common/fesm5/http.js");
+/* harmony import */ var rxjs__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! rxjs */ "./node_modules/rxjs/_esm5/index.js");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+
+
 
 
 
@@ -216,9 +233,46 @@ var InvoiceService = /** @class */ (function () {
         this.httpClient = httpClient;
         this.serveUrl = "/api/v1";
     }
+    InvoiceService.prototype.log = function (message) {
+        //this.messageService.add(`HeroService: ${message}`);
+        console.log("HeroService: " + message);
+    };
+    InvoiceService.prototype.handleError = function (operation, result) {
+        var _this = this;
+        if (operation === void 0) { operation = 'operation'; }
+        return function (error) {
+            // TODO: send the error to remote logging infrastructure
+            console.error(error); // log to console instead
+            // TODO: better job of transforming error for user consumption
+            _this.log(operation + " failed: " + error.message);
+            // Let the app keep running by returning an empty result.
+            return Object(rxjs__WEBPACK_IMPORTED_MODULE_3__["of"])(result);
+        };
+    };
     InvoiceService.prototype.getInvoices = function () {
         var url = this.serveUrl + "/invoices";
         return this.httpClient.get(url);
+    };
+    InvoiceService.prototype.addInvoice = function (invoice) {
+        var _this = this;
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+        var url = this.serveUrl + "/invoices";
+        return this.httpClient.post(url, invoice, { responseType: 'text', headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () { return _this.log("add invoice id =" + invoice.id_invoice); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('addInvoice', [])));
+    };
+    InvoiceService.prototype.updateInvoice = function (invoice) {
+        var _this = this;
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+        var url = this.serveUrl + "/invoices/" + invoice.id_invoice;
+        return this.httpClient.put(url, invoice, { responseType: 'text', headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () { return _this.log("updated invoice id=" + invoice.id_invoice); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('updateInvoice', [])));
+    };
+    InvoiceService.prototype.deleteInvoice = function (invoice) {
+        var _this = this;
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
+        var url = this.serveUrl + "/invoices/" + invoice.id_invoice;
+        return this.httpClient.delete(url, { responseType: 'text', headers: headers })
+            .pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["tap"])(function () { return _this.log("delete invoice id =" + invoice.id_invoice); }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["catchError"])(this.handleError('deleteInvoice', [])));
     };
     InvoiceService = tslib__WEBPACK_IMPORTED_MODULE_0__["__decorate"]([
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_1__["Injectable"])({
@@ -273,7 +327,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"selectedInvoice\">\n  {{selectedInvoice.id_invoice}}\n</div>\n\n\n<table class=\"table\">\n  <thead>\n      <tr>\n          <th>Invoice</th>\n          <th>Project</th>\n          <th>Supplier CIF</th>\n          <th>Supplier Name</th>\n          <th>Supplier Address</th>\n          <th>Description</th>\n          <th>Amount</th>\n          <th>State</th>\n          <th>Credit</th>\n          <th>&nbsp;</th>\n      </tr>\n  </thead>\n\n  <tr>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_invoice\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_project\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[0]\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[1]\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[2]\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.description\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.amount\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.state\"></td>\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_credit\"></td>\n    <td><button class=\"btn btn-primary\" (click)=\"addInvoice()\">Add Invoice</button> </td>\n</tr>    \n\n<tr *ngFor=\"let invoice of invoices\" app-editable-invoice [invoice] = \"invoice\">\n</tr>    \n</table>\n\n\n"
+module.exports = "<div *ngIf=\"selectedInvoice\">\r\n  {{selectedInvoice.id_invoice}}\r\n</div>\r\n\r\n\r\n<table class=\"table\">\r\n  <thead>\r\n      <tr>\r\n          <th>Invoice</th>\r\n          <th>Project</th>\r\n          <th>Supplier CIF</th>\r\n          <th>Supplier Name</th>\r\n          <th>Supplier Address</th>\r\n          <th>Description</th>\r\n          <th>Amount</th>\r\n          <th>State</th>\r\n          <th>Credit</th>\r\n          <th>&nbsp;</th>\r\n          <th>&nbsp;</th>\r\n      </tr>\r\n  </thead>\r\n\r\n  <tr>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_invoice\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_project\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[0]\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[1]\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[2]\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.description\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.amount\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.state\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_credit\"></td>\r\n    <td><button class=\"btn btn-primary\" (click)=\"addInvoice()\">Add Invoice</button> </td>\r\n</tr>    \r\n\r\n<tr *ngFor=\"let invoice of invoices\" app-editable-invoice [invoice] = \"invoice\">\r\n</tr>    \r\n</table>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -325,6 +379,12 @@ var InvoicesComponent = /** @class */ (function () {
             .subscribe(function (invoices) {
             _this.invoices = invoices;
         });
+    };
+    InvoicesComponent.prototype.onEdit = function (invoice) {
+        this.selectedInvoice = invoice;
+    };
+    InvoicesComponent.prototype.deleteInvoice = function (invoice) {
+        this.invoiceService.deleteInvoice(invoice);
     };
     InvoicesComponent.prototype.ngOnInit = function () {
         this.getInvoices();
@@ -405,7 +465,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\belen\Documents\MASTER\Fundamentos_IS\Tickets\invoices-full\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\Marina\Documents\Universidad\MASTER\FISSC\ProyectoFactura\fis18-04\src\main.ts */"./src/main.ts");
 
 
 /***/ })
