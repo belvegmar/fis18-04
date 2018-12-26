@@ -1,5 +1,6 @@
 import { Component, OnInit, Input} from '@angular/core';
 import {Invoice} from '../invoices/invoice';
+import { InvoiceService } from '../invoice.service';
 
 @Component({
   selector: '[app-editable-invoice]',
@@ -11,11 +12,21 @@ export class EditableInvoiceComponent implements OnInit {
   @Input() invoice: Invoice;
   editable = false;
 
-  constructor() { }
+  constructor(private invoiceService: InvoiceService) { }
 
-  onEdit(){
-    this.editable = ! this.editable;
+  onEdit(): void {
+    if (this.editable) {
+      this.invoiceService.updateInvoice(this.invoice)
+         .subscribe(() => this.editable = !this.editable);
+    } else {
+      this.editable = ! this.editable;
+    }
   }
+
+  deleteInvoice(): void{
+    this.invoiceService.deleteInvoice(this.invoice);
+  }
+
 
   ngOnInit() {
   }

@@ -45,6 +45,14 @@ export class InvoicesComponent implements OnInit {
     });
   }
 
+  onEdit(invoice: Invoice): void {
+    this.selectedInvoice = invoice;
+  }
+
+  deleteInvoice(invoice: Invoice): void{
+    this.invoiceService.deleteInvoice(invoice);
+  }
+
   ngOnInit() {
     this.getInvoices();
   }
