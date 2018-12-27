@@ -60,6 +60,22 @@ describe('Invoices API', ()=> {
     });
 
 
+/*    describe('GET /invoices/id_invoice', ()=>{
+        it('Should return a single invoice', (done) =>{ 
+            var dbMock = sinon.mock(server.db);
+            var id_invoice = 3;
+  
+          chai.request(server.app).get('/api/v1/invoices' + id_invoice)
+            .end((err,res)=>{
+                expect(res).to.have.status(200);
+                server.db.find( {id_invoice: id_invoice}, (err, invoices) => {
+                    dbMock.verify();
+                    done();
+                });
+            });
+        });
+    });
+*/
 
 /* #############################################################################
 ############################## PRUEBAS DEL POST ####################################
@@ -82,5 +98,61 @@ describe('Invoices API', ()=> {
             });
         });
     });
+
+
+
+
+/* ###############################################################################
+############################## PRUEBAS DEL PUT ###################################
+################################################################################*/
+
+/*     describe ('PUT /invoices/id_invoice', ()=>{
+        it('Should update an invoice', (done)=>{
+            var invoice ={id_invoice: 2, id_project: 33, supplier: ["cif10", "Aldi", "Sevilla"], description: "prueba", amount: 500, state: true, id_credit: 35 };
+            var dbMock = sinon.mock(server.db);
+            dbMock.expects('update').withArgs(invoice);
+
+            chai.request(server.app).put('/api/v1/invoices')
+            .end((err,res)=>{
+                expect(res).to.have.status(201);
+                server.db.update( {id_invoice: 2}, (err, invoices) => {
+                    dbMock.verify();
+                    done();
+                });
+            });
+        });
+    });*/
+
+
+
+    /* ###############################################################################
+############################## PRUEBAS DEL DELETE ###################################
+################################################################################*/
+/*
+        describe('DELETE /invoices', ()=>{
+             it('Should remove all invoices', (done) =>{   
+                chai.request(server.app).delete('/api/v1/invoices')
+                .end((err,res)=>{
+                expect(res).to.have.status(200);
+                done();
+                });
+              });
+         });
+*/
+
+         describe('DELETE /invoices/id_invoice', ()=>{
+            it('Should remove a single invoice', (done) =>{ 
+                var dbMock = sinon.mock(server.db);
+                var id_invoice = 3;
+      
+              chai.request(server.app).delete('/api/v1/invoices/:id_invoices')
+                .end((err,res)=>{
+                    server.db.remove( {id_invoice: id_invoice}, (err, invoices) => {
+                        dbMock.verify();
+                        done();
+                    });
+                });
+            });
+        });
 
 });
