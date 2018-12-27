@@ -71,10 +71,10 @@ app.get(BASE_URL + "/invoices", (req, res) => {
 //Obtain a single invoice
 
 app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
-    var id_invoice = req.params.id_invoice;
+    var id_invoice = Number(req.params.id_invoice);
     console.log(Date() + " - GET /invoices/" + id_invoice);
 
-    db.find({ id_invoice: "id_invoice" }, (err, invoices) => {
+    db.find({ id_invoice: id_invoice }, (err, invoices) =>  {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -82,6 +82,7 @@ app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
             if (invoices.length > 1) {
                 console.warn("Incosistent DB: duplicated id_invoice");
             }
+            console.log(invoices);
             res.send(invoices.map((invoice) => {
                 delete invoice._id;
                 return invoice;
@@ -101,14 +102,13 @@ app.put(BASE_URL + "/invoices", (req, res) => {
 });
 
 
-//error put
 app.put(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     //update invoice
-    var id_invoice = req.params.id_invoice;
+    var id_invoice = Number(req.params.id_invoice);
     var updatedInvoice = req.body;
     console.log(Date() + " - PUT /invoices/" + id_invoice);
 
-    if (id_invoice != updatedInvoide.id_invoice) {
+    if (id_invoice != updatedInvoice.id_invoice) {
         res.sendStatus(409);
         return;
     }
@@ -160,7 +160,7 @@ app.delete(BASE_URL + "/invoices", (req, res) => {
 
 app.delete(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     // Delete a single invoice
-    var id_invoice = req.params.id_invoice;
+    var id_invoice = Number(req.params.id_invoice);
     console.log(Date() + " - DELETE /invoices/" + id_invoice);
 
     db.remove({ "id_invoice": id_invoice }, {}, (err, numRemoved) => {
