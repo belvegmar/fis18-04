@@ -557,7 +557,7 @@ if(false) {}
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Marina\Documents\Universidad\MASTER\FISSC\ProyectoFactura\fis18-04\src\styles.css */"./src/styles.css");
+module.exports = __webpack_require__(/*! C:\Users\belen\Documents\MASTER\Fundamentos_IS\Tickets\fis18-04\src\styles.css */"./src/styles.css");
 
 
 /***/ })

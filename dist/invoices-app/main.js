@@ -255,6 +255,7 @@ var InvoiceService = /** @class */ (function () {
     };
     InvoiceService.prototype.addInvoice = function (invoice) {
         var _this = this;
+        console.log("Ha entrado en el servicio");
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'Content-Type': 'application/json' });
         var url = this.serveUrl + "/invoices";
         return this.httpClient.post(url, invoice, { responseType: 'text', headers: headers })
@@ -465,7 +466,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Marina\Documents\Universidad\MASTER\FISSC\ProyectoFactura\fis18-04\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\belen\Documents\MASTER\Fundamentos_IS\Tickets\fis18-04\src\main.ts */"./src/main.ts");
 
 
 /***/ })
