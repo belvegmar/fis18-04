@@ -25,7 +25,7 @@ export class InvoicesComponent implements OnInit {
 
 
   addInvoice() {
-    this.invoices.push(this.newInvoice);
+    this.invoiceService.addInvoice(this.newInvoice).subscribe(invoice => this.invoices.push(invoice));
     this.newInvoice = {
       id_invoice : null,
       id_project : null,
