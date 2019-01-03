@@ -1,3 +1,3 @@
-{"id_invoice":2,"id_project":2,"supplier":["cif1","Mercadona","Arcos de la Fra"],"description":"prueba","amount":600,"state":false,"id_credit":36,"_id":"0OY4kwwm4bx40Wa1"}
+{"id_invoice":"2","id_project":null,"supplier":[null,null,null],"description":null,"amount":null,"state":null,"id_credit":null,"_id":"3HIGsQtBZddBRbOl"}
+{"id_invoice":"2","id_project":null,"supplier":[null,null,null],"description":null,"amount":null,"state":null,"id_credit":null,"_id":"CQESQxzOTlIH5ZeL"}
 {"id_invoice":1,"id_project":2,"supplier":["cif1","Mercadona","Arcos de la Fra"],"description":"prueba","amount":500,"state":true,"id_credit":35,"_id":"tkPVTBAzXfPKnT49"}
-{"id_invoice":3,"id_project":2,"supplier":["cif2","Carrefour","Sevilla"],"description":"prueba","amount":700,"state":true,"id_credit":37,"_id":"ukwMD7lQhddgfAVk"}

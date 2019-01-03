@@ -59,7 +59,7 @@ app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     var id_invoice = Number(req.params.id_invoice);
     console.log(Date() + " - GET /invoices/" + id_invoice);
 
-    invoice.find({ id_invoice: id_invoice }, (err, invoices) =>  {
+    Invoice.find({ id_invoice: id_invoice }, (err, invoices) =>  {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -75,6 +75,39 @@ app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     });
 });
 
+
+/* #############################################################################
+##############################      POST     ###################################
+################################################################################*/
+app.post(BASE_URL + "/invoices", (req, res) => {
+    // Create a new invoice
+    console.log(Date() + " - POST /invoices");
+    //console.log((req.body.supplier[0]));
+
+    var invoice = new Invoice(req.body)
+
+    //console.log(req.body.supplier[0]);
+    //console.log(req.body);
+    //db.insert(invoice);
+    invoice.save(function (err, saved_invoice){
+        if (err) {
+            console.error(err);
+            res.sendStatus(500);
+        }else{
+            res.sendStatus(201);
+        }
+    });
+});
+
+
+
+app.post(BASE_URL + "/invoices/:id_invoice", (req, res) => {
+    // Forbidden
+    console.log(Date() + " - POST /invoices");
+    res.sendStatus(405);
+});
+
+
 /* #############################################################################
 ##############################      PUT      ###################################
 ################################################################################*/
@@ -88,55 +121,33 @@ app.put(BASE_URL + "/invoices", (req, res) => {
 
 app.put(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     //update invoice
+    //var id_invoice = Invoice.ObjectId.fromString(req.params.id_invoice);
     var id_invoice = Number(req.params.id_invoice);
-    var updatedInvoice = req.body;
+    var updatedInvoice = new Invoice(req.body);
     console.log(Date() + " - PUT /invoices/" + id_invoice);
 
     if (id_invoice != updatedInvoice.id_invoice) {
         res.sendStatus(409);
         return;
-    }
+    }  
 
-    db.update({ "id_invoice": id_invoice }, updatedInvoice, (err, numUpdated) => {
+
+    Invoice.findOneAndUpdate({"id_invoice" :id_invoice}, req.body, (err, invoices) =>  {        
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
         } else {
-            if (numUpdated > 1) {
+            if (invoices.length > 1) {
                 console.warn("Inconsistent DB: duplicated id_invoice");
-            } else if (numUpdated == 0) {
+            } else if (invoices.length == 0) {
                 res.sendStatus(404);
             } else {
                 res.sendStatus(200);
             }
         }
-    })
-})
-
-
-/* #############################################################################
-##############################      POST     ###################################
-################################################################################*/
-app.post(BASE_URL + "/invoices", (req, res) => {
-    // Create a new invoice
-    console.log(Date() + " - POST /invoices");
-    var invoice = req.body;
-    db.insert(invoice);
-    Invoice.save(contact, (err)=> {
-        if (err) {
-            console.error(err);
-            res.sendStatus(500);
-        }else{
-            res.sendStatus(201);
-        }
     });
 });
 
-app.post(BASE_URL + "/invoices/:id_invoice", (req, res) => {
-    // Forbidden
-    console.log(Date() + " - POST /invoices");
-    res.sendStatus(405);
-});
 
 /* #############################################################################
 ##############################      DELETE   ###################################
@@ -144,17 +155,18 @@ app.post(BASE_URL + "/invoices/:id_invoice", (req, res) => {
 app.delete(BASE_URL + "/invoices", (req, res) => {
     // Remove all invoices
     console.log(Date() + " - DELETE /invoices");
-    db.remove({}, { multi: true });
+    Invoice.remove({}, function(err){});
     res.sendStatus(200);
 });
 
 
 app.delete(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     // Delete a single invoice
+    console.log(req.params.id_invoice);
     var id_invoice = Number(req.params.id_invoice);
     console.log(Date() + " - DELETE /invoices/" + id_invoice);
 
-    db.remove({ "id_invoice": id_invoice }, {}, (err, numRemoved) => {
+    Invoice.deleteMany({ "id_invoice": id_invoice }, (err, numRemoved) => {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);

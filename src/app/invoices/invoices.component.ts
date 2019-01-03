@@ -14,7 +14,9 @@ export class InvoicesComponent implements OnInit {
   newInvoice : Invoice = {
     id_invoice : null,
     id_project : null,
-    supplier : [null, null, null],
+    supplier_cif: null,
+    supplier_name: null,
+    supplier_address: null,
     description : null,
     amount : null,
     state : null,
@@ -25,11 +27,14 @@ export class InvoicesComponent implements OnInit {
 
 
   addInvoice() {
-    this.invoices.push(this.newInvoice);
+    console.log("Hola");
+    this.invoiceService.addInvoice(this.newInvoice).subscribe(invoice => this.invoices.push(invoice));
     this.newInvoice = {
       id_invoice : null,
       id_project : null,
-      supplier : [null, null, null],
+      supplier_cif: null,
+      supplier_name: null,
+      supplier_address: null,
       description : null,
       amount : null,
       state : null,
