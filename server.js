@@ -19,16 +19,7 @@ app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, INVOICES_APP_DIR, '/index.html'));
 });
 
-var db = new DataStore({
-    filename: dbFileName,
-    autoload: true
-});
 
-var initialInvoices = [
-    { id_invoice: 1, id_project: 2, supplier: ["cif1", "Mercadona", "Arcos de la Fra"], description: "prueba", amount: 500, state: true, id_credit: 35 },
-    { id_invoice: 2, id_project: 2, supplier: ["cif1", "Mercadona", "Arcos de la Fra"], description: "prueba", amount: 600, state: false, id_credit: 36 },
-    { id_invoice: 3, id_project: 2, supplier: ["cif2", "Carrefour", "Sevilla"], description: "prueba", amount: 700, state: true, id_credit: 37 }
-];
 
 
 
@@ -82,15 +73,10 @@ app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
 app.post(BASE_URL + "/invoices", (req, res) => {
     // Create a new invoice
     console.log(Date() + " - POST /invoices");
-    //console.log((req.body.supplier[0]));
 
-    var invoice = new Invoice(req.body)
-
-    //console.log(req.body.supplier[0]);
-    //console.log(req.body);
-    //db.insert(invoice);
-    invoice.save(function (err, saved_invoice){
-        if (err) {
+    var invoice = req.body;
+    Invoice.create(invoice, (err) => {
+        if(err){
             console.error(err);
             res.sendStatus(500);
         }else{
@@ -184,4 +170,4 @@ app.delete(BASE_URL + "/invoices/:id_invoice", (req, res) => {
 
 
 module.exports.app = app;
-module.exports.db = db;
+//module.exports.db = db;
