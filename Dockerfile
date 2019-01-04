@@ -9,7 +9,7 @@ RUN npm install
 
 COPY index.js .
 COPY invoices.js .
-COPY apikeys.js .
+#COPY apikeys.js .
 COPY server.js .
 COPY dist dist
 

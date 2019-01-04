@@ -2,6 +2,7 @@ var server = require('./server');
 var mongoose = require('mongoose');
 var PORT = (process.env.PORT || 3000);
 var dbUrl = process.env.DB || 'mongodb://localhost/test';
+console.log(process.env.DB);
 
 console.log("Starting API server...");
 mongoose.connect(dbUrl, { useNewUrlParser: true });
