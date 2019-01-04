@@ -14,7 +14,9 @@ export class InvoicesComponent implements OnInit {
   newInvoice : Invoice = {
     id_invoice : null,
     id_project : null,
-    supplier : [null, null, null],
+    supplier_cif: null,
+    supplier_name: null,
+    supplier_address: null,
     description : null,
     amount : null,
     state : null,
@@ -29,7 +31,9 @@ export class InvoicesComponent implements OnInit {
     this.newInvoice = {
       id_invoice : null,
       id_project : null,
-      supplier : [null, null, null],
+      supplier_cif: null,
+      supplier_name: null,
+      supplier_address: null,
       description : null,
       amount : null,
       state : null,

@@ -1,7 +1,9 @@
 export class Invoice{
     id_invoice : number;
     id_project : number;
-    supplier : string[] = ['supplier_cif', 'supplier_name', 'supplier_address'];
+    supplier_cif : string;
+    supplier_name : string;
+    supplier_address : string;
     description : string;
     amount : number;
     state : boolean;

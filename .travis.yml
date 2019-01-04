@@ -4,6 +4,7 @@ node_js:
   - "9"
 services:
   - docker
+  - mongodb
 
 before_install:
   - wget -qO- https://toolbelt.heroku.com/install.sh | sh
@@ -15,7 +16,7 @@ install:
 script:
   - ng build --prod --aot
   # build docker images
-  - docker build -t contacts .
+  - docker build -t invoices .
 
 deploy:
   provider: script
@@ -26,3 +27,4 @@ deploy:
     heroku container:push web -a $HEROKU_APP_NAME;
     heroku container:release web -a $HEROKU_APP_NAME;
   branch: master
+ 

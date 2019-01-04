@@ -147,7 +147,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<td *ngIf=\"!editable\">{{invoice.id_invoice}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_project}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier[0]}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier[1]}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier[2]}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.description}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.amount}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.state}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_credit}}</td>\r\n\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_invoice\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_project\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[0]\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[1]\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier[2]\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.description\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.amount\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.state\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_credit\"/></td>\r\n\r\n\r\n<td><button class=\"btn\" (click)=\"onEdit()\">{{editable ? 'Save': 'Edittt'}}</button></td>\r\n<td><button class=\"btn\" (click)=\"deleteInvoice()\">Delete</button></td>"
+module.exports = "\r\n<td *ngIf=\"!editable\">{{invoice.id_invoice}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_project}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_cif}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_name}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_address}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.description}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.amount}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.state}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_credit}}</td>\r\n\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_invoice\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_project\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_cif\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_name\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_address\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.description\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.amount\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.state\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_credit\"/></td>\r\n\r\n\r\n<td><button class=\"btn\" (click)=\"onEdit()\">{{editable ? 'Save': 'Edit'}}</button></td>\r\n<td><button class=\"btn\" (click)=\"deleteInvoice()\">Delete</button></td>"
 
 /***/ }),
 
@@ -299,7 +299,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Invoice", function() { return Invoice; });
 var Invoice = /** @class */ (function () {
     function Invoice() {
-        this.supplier = ['supplier_cif', 'supplier_name', 'supplier_address'];
     }
     return Invoice;
 }());
@@ -327,7 +326,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"selectedInvoice\">\r\n  {{selectedInvoice.id_invoice}}\r\n</div>\r\n\r\n\r\n<table class=\"table\">\r\n  <thead>\r\n      <tr>\r\n          <th>Invoice</th>\r\n          <th>Project</th>\r\n          <th>Supplier CIF</th>\r\n          <th>Supplier Name</th>\r\n          <th>Supplier Address</th>\r\n          <th>Description</th>\r\n          <th>Amount</th>\r\n          <th>State</th>\r\n          <th>Credit</th>\r\n          <th>&nbsp;</th>\r\n          <th>&nbsp;</th>\r\n      </tr>\r\n  </thead>\r\n\r\n  <tr>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_invoice\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_project\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[0]\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[1]\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier[2]\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.description\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.amount\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.state\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_credit\"></td>\r\n    <td><button class=\"btn btn-primary\" (click)=\"addInvoice()\">Add Invoice</button> </td>\r\n</tr>    \r\n\r\n<tr *ngFor=\"let invoice of invoices\" app-editable-invoice [invoice] = \"invoice\">\r\n</tr>    \r\n</table>\r\n\r\n\r\n"
+module.exports = "<div *ngIf=\"selectedInvoice\">\r\n  {{selectedInvoice.id_invoice}}\r\n</div>\r\n\r\n\r\n<table class=\"table\">\r\n  <thead>\r\n      <tr>\r\n          <th>Invoice</th>\r\n          <th>Project</th>\r\n          <th>Supplier CIF</th>\r\n          <th>Supplier Name</th>\r\n          <th>Supplier Address</th>\r\n          <th>Description</th>\r\n          <th>Amount</th>\r\n          <th>State</th>\r\n          <th>Credit</th>\r\n          <th>&nbsp;</th>\r\n          <th>&nbsp;</th>\r\n      </tr>\r\n  </thead>\r\n\r\n  <tr>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_invoice\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_project\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_cif\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_name\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_address\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.description\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.amount\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.state\"></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_credit\"></td>\r\n    <td><button class=\"btn btn-primary\" (click)=\"addInvoice()\">Add Invoice</button> </td>\r\n</tr>    \r\n\r\n\r\n<tr *ngFor=\"let invoice of invoices\" app-editable-invoice [invoice] = \"invoice\">\r\n</tr>    \r\n</table>\r\n\r\n\r\n"
 
 /***/ }),
 
@@ -353,7 +352,9 @@ var InvoicesComponent = /** @class */ (function () {
         this.newInvoice = {
             id_invoice: null,
             id_project: null,
-            supplier: [null, null, null],
+            supplier_cif: null,
+            supplier_name: null,
+            supplier_address: null,
             description: null,
             amount: null,
             state: null,
@@ -361,11 +362,15 @@ var InvoicesComponent = /** @class */ (function () {
         };
     }
     InvoicesComponent.prototype.addInvoice = function () {
-        this.invoices.push(this.newInvoice);
+        var _this = this;
+        console.log("Hola");
+        this.invoiceService.addInvoice(this.newInvoice).subscribe(function (invoice) { return _this.invoices.push(invoice); });
         this.newInvoice = {
             id_invoice: null,
             id_project: null,
-            supplier: [null, null, null],
+            supplier_cif: null,
+            supplier_name: null,
+            supplier_address: null,
             description: null,
             amount: null,
             state: null,
@@ -465,7 +470,7 @@ Object(_angular_platform_browser_dynamic__WEBPACK_IMPORTED_MODULE_1__["platformB
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\Users\Marina\Documents\Universidad\MASTER\FISSC\ProyectoFactura\fis18-04\src\main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! C:\Users\belen\Documents\MASTER\Fundamentos_IS\Tickets\fis18-04\src\main.ts */"./src/main.ts");
 
 
 /***/ })

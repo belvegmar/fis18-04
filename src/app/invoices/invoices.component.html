@@ -23,15 +23,16 @@
   <tr>
     <td><input class="form-control" [(ngModel)]="newInvoice.id_invoice"></td>
     <td><input class="form-control" [(ngModel)]="newInvoice.id_project"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier[0]"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier[1]"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier[2]"></td>
+    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_cif"></td>
+    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_name"></td>
+    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_address"></td>
     <td><input class="form-control" [(ngModel)]="newInvoice.description"></td>
     <td><input class="form-control" [(ngModel)]="newInvoice.amount"></td>
     <td><input class="form-control" [(ngModel)]="newInvoice.state"></td>
     <td><input class="form-control" [(ngModel)]="newInvoice.id_credit"></td>
     <td><button class="btn btn-primary" (click)="addInvoice()">Add Invoice</button> </td>
 </tr>    
+
 
 <tr *ngFor="let invoice of invoices" app-editable-invoice [invoice] = "invoice">
 </tr>    
