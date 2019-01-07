@@ -21,17 +21,23 @@
   </thead>
 
   <tr>
-    <td><input class="form-control" [(ngModel)]="newInvoice.id_invoice"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.id_project"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_cif"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_name"></td>
+    <td><input type="number" required class="form-control" [(ngModel)]="newInvoice.id_invoice" required></td>
+    <td><input type="number" class="form-control" [(ngModel)]="newInvoice.id_project"></td>
+    <td><input type="text" maxlength="9" placeholder="Introduzca 9 caracteres" class="form-control" [(ngModel)]="newInvoice.supplier_cif" required></td>
+    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_name" required></td>
     <td><input class="form-control" [(ngModel)]="newInvoice.supplier_address"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.description"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.amount"></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.state"></td>
+    <td><input class="form-control"  [(ngModel)]="newInvoice.description"></td>
+    <td><input type="number" class ="form-control" [(ngModel)]="newInvoice.amount"></td>
+    <td>
+        <input type="radio" value="true" [(ngModel)]="newInvoice.state">Yes<br>
+        <input type="radio" value="false" [(ngModel)]="newInvoice.state">No<br>
+    </td>
+    <!-- <td><input class="form-control" [(ngModel)]="newInvoice.state"></td> -->
     <td><input class="form-control" [(ngModel)]="newInvoice.id_credit"></td>
     <td><button class="btn btn-primary" (click)="addInvoice()">Add Invoice</button> </td>
-</tr>    
+</tr>  
+
+
 
 
 <tr *ngFor="let invoice of invoices" app-editable-invoice [invoice] = "invoice">

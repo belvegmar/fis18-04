@@ -40,6 +40,7 @@ export class InvoicesComponent implements OnInit {
       id_credit : null
     }
 
+    
   };
 
   getInvoices() {
@@ -47,6 +48,7 @@ export class InvoicesComponent implements OnInit {
     .subscribe((invoices) => {
       this.invoices=invoices;
     });
+    
   }
 
   onEdit(invoice: Invoice): void {
@@ -55,10 +57,13 @@ export class InvoicesComponent implements OnInit {
 
   deleteInvoice(invoice: Invoice): void{
     this.invoiceService.deleteInvoice(invoice);
+    
   }
 
   ngOnInit() {
     this.getInvoices();
   }
+
+
 
 }
