@@ -70,6 +70,7 @@ export class InvoiceService {
           tap(() => this.log(`delete invoice id =${invoice.id_invoice}`)),
           catchError(this.handleError('deleteInvoice', []))
       );
+      
   }
 
 }
