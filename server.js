@@ -4,16 +4,35 @@ var DataStore = require("nedb");
 var cors = require("cors");
 var path = require('path')
 var Invoice = require('./invoices');
+var passport = require('passport');
+var localAPIkey = require('passport-localapikey-update').Strategy;
+var ApiKey = require('./apikeys');
 
 const INVOICES_APP_DIR = "/dist/invoices-app";
 var BASE_URL = "/api/v1";
+
+passport.use(new localAPIkey(
+    (apikey, done) => {
+        ApiKey.findOne({apikey:"04c76028-84e9-4b54-83a4-740dde6d1da3"}, (err, user) => {
+            if(err) {return done(err);}
+            if(!user) {
+                return done(null, false, {message: 'Unknown apikey '+ apikey});
+            }else {
+                console.log("Logged as: "+ user.user);
+                return done(null,user);
+            }
+        });
+    }
+));
 
 var dbFileName = __dirname + "/invoices.json";
 
 
 var app = express();
 app.use(bodyParser.json());
+app.use(passport.initialize());
 app.use(cors());
+
 app.use(express.static(path.join(__dirname, INVOICES_APP_DIR)));
 app.get('/', function (req, res) {
     res.sendFile(path.join(__dirname, INVOICES_APP_DIR, '/index.html'));
@@ -29,20 +48,22 @@ app.get('/', function (req, res) {
 ################################################################################*/
 //Obtain all invoices
 
-app.get(BASE_URL + "/invoices", (req, res) => {
-    console.log(Date() + " - GET /invoices");
+app.get(BASE_URL + "/invoices",
+    passport.authenticate('localapikey', { session: false }),
+    (req, res) => {
+        console.log(Date() + " - GET /invoices");
 
-    Invoice.find({}, (err, invoices) => {
-        if (err) {
-            console.error("Error accesing DB");
-            res.senStatus(500);
-        } else {
-            res.send(invoices.map((invoice) => {
-                return invoice.cleanup();
-            }));
-        }
+        Invoice.find({}, (err, invoices) => {
+            if (err) {
+                console.error("Error accesing DB");
+                res.senStatus(500);
+            } else {
+                res.send(invoices.map((invoice) => {
+                    return invoice.cleanup();
+                }));
+            }
+        });
     });
-});
 
 //Obtain a single invoice
 
@@ -50,7 +71,7 @@ app.get(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     var id_invoice = Number(req.params.id_invoice);
     console.log(Date() + " - GET /invoices/" + id_invoice);
 
-    Invoice.find({ id_invoice: id_invoice }, (err, invoices) =>  {
+    Invoice.find({ id_invoice: id_invoice }, (err, invoices) => {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -76,10 +97,10 @@ app.post(BASE_URL + "/invoices", (req, res) => {
 
     var invoice = req.body;
     Invoice.create(invoice, (err) => {
-        if(err){
+        if (err) {
             console.error(err);
             res.sendStatus(500);
-        }else{
+        } else {
             res.sendStatus(201);
         }
     });
@@ -115,10 +136,10 @@ app.put(BASE_URL + "/invoices/:id_invoice", (req, res) => {
     if (id_invoice != updatedInvoice.id_invoice) {
         res.sendStatus(409);
         return;
-    }  
+    }
 
 
-    Invoice.findOneAndUpdate({"id_invoice" :id_invoice}, req.body, (err, invoices) =>  {        
+    Invoice.findOneAndUpdate({ "id_invoice": id_invoice }, req.body, (err, invoices) => {
         if (err) {
             console.error("Error accesing DB");
             res.sendStatus(500);
@@ -141,7 +162,7 @@ app.put(BASE_URL + "/invoices/:id_invoice", (req, res) => {
 app.delete(BASE_URL + "/invoices", (req, res) => {
     // Remove all invoices
     console.log(Date() + " - DELETE /invoices");
-    Invoice.remove({}, function(err){});
+    Invoice.remove({}, function (err) { });
     res.sendStatus(200);
 });
 
