@@ -1,7 +1,8 @@
 var mongoose = require('mongoose');
+var uniqueValidator = require('mongoose-unique-validator');
 
 var invoiceSchema = new mongoose.Schema({
-    id_invoice : Number,
+    id_invoice : {type: Number, required:true, unique:true},
     id_project : Number,
     supplier_cif : String,
     supplier_name : String,
@@ -14,6 +15,10 @@ var invoiceSchema = new mongoose.Schema({
     state : Boolean,
     id_credit : Number 
 });
+
+//Añadir validador para que no pueda haber 2 id_invoice iguales
+invoiceSchema.plugin(uniqueValidator);
+
 
 invoiceSchema.methods.cleanup = function() {
     return {id_invoice: this.id_invoice, id_project : this.id_project, supplier_cif: this.supplier_cif,
