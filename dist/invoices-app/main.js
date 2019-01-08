@@ -250,8 +250,9 @@ var InvoiceService = /** @class */ (function () {
         };
     };
     InvoiceService.prototype.getInvoices = function () {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'apikey': '04c76028-84e9-4b54-83a4-740dde6d1da3' });
         var url = this.serveUrl + "/invoices";
-        return this.httpClient.get(url);
+        return this.httpClient.get(url, { headers: headers });
     };
     InvoiceService.prototype.addInvoice = function (invoice) {
         var _this = this;

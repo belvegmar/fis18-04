@@ -34,8 +34,9 @@ export class InvoiceService {
   }
 
   getInvoices(): Observable<Invoice[]> {
+    let headers = new HttpHeaders({ 'apikey': '04c76028-84e9-4b54-83a4-740dde6d1da3' });
     const url = this.serveUrl + "/invoices";
-    return this.httpClient.get<Invoice[]>(url);
+    return this.httpClient.get<Invoice[]>(url, {headers:headers});
 
   }
 
