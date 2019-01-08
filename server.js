@@ -13,7 +13,7 @@ var BASE_URL = "/api/v1";
 
 passport.use(new localAPIkey(
     (apikey, done) => {
-        ApiKey.findOne({apikey:"04c76028-84e9-4b54-83a4-740dde6d1da3"}, (err, user) => {
+        ApiKey.findOne({apikey:apikey}, (err, user) => {
             if(err) {return done(err);}
             if(!user) {
                 return done(null, false, {message: 'Unknown apikey '+ apikey});

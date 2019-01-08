@@ -3,7 +3,6 @@ var mongoose = require('mongoose');
 var ApiKey = require('./apikeys');
 var PORT = (process.env.PORT || 3000);
 var dbUrl = process.env.DB || 'mongodb://localhost/test';
-console.log(process.env.DB);
 
 console.log("Starting API server...");
 mongoose.connect(dbUrl, { useNewUrlParser: true });
@@ -20,7 +19,7 @@ db.once('open', function () {
                 if (err) {
                     console.log(err);
                 } else {
-                    console.log('user: ' + user.user + ", " + user.apikey + " saved.");
+                    console.log('user: ' + user.user + ", " + user.apikey + " saved." );
                 }
             });
         }
