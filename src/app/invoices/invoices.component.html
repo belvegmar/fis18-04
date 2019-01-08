@@ -1,47 +1,73 @@
 <div *ngIf="selectedInvoice">
-  {{selectedInvoice.id_invoice}}
+    {{selectedInvoice.id_invoice}}
 </div>
 
 
 <table class="table">
-  <thead>
-      <tr>
-          <th>Invoice</th>
-          <th>Project</th>
-          <th>Supplier CIF</th>
-          <th>Supplier Name</th>
-          <th>Supplier Address</th>
-          <th>Description</th>
-          <th>Amount</th>
-          <th>State</th>
-          <th>Credit</th>
-          <th>&nbsp;</th>
-          <th>&nbsp;</th>
-      </tr>
-  </thead>
+    <thead>
+        <tr>
+            <th>Invoice</th>
+            <th>Project</th>
+            <th>&nbsp;</th>
+            <th>Supplier CIF</th>
+            <th>Supplier Name</th>
+            <th>Supplier Address</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>State</th>
+            <th>Credit</th>
+            <th>&nbsp;</th>
+        </tr>
+    </thead>
 
-  <tr>
-    <td><input type="number" required class="form-control" [(ngModel)]="newInvoice.id_invoice" required></td>
-    <td><input type="number" class="form-control" [(ngModel)]="newInvoice.id_project"></td>
-    <td><input type="text" maxlength="9" placeholder="Introduzca 9 caracteres" class="form-control" [(ngModel)]="newInvoice.supplier_cif" required></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_name" required></td>
-    <td><input class="form-control" [(ngModel)]="newInvoice.supplier_address"></td>
-    <td><input class="form-control"  [(ngModel)]="newInvoice.description"></td>
-    <td><input type="number" class ="form-control" [(ngModel)]="newInvoice.amount"></td>
-    <td>
-        <input type="radio" value="true" [(ngModel)]="newInvoice.state">Yes<br>
-        <input type="radio" value="false" [(ngModel)]="newInvoice.state">No<br>
-    </td>
-    <!-- <td><input class="form-control" [(ngModel)]="newInvoice.state"></td> -->
-    <td><input class="form-control" [(ngModel)]="newInvoice.id_credit"></td>
-    <td><button class="btn btn-primary" (click)="addInvoice()">Add Invoice</button> </td>
-</tr>  
+    <tr>
+        <td><input type="number" required class="form-control" [(ngModel)]="newInvoice.id_invoice" required></td>
+        <td><input type="number" class="form-control" [(ngModel)]="newInvoice.id_project"></td>
+        <td><button class="btn btn-primary" (click)="getProyects()">Show Proyects</button> </td>
+        <td><input type="text" maxlength="9" placeholder="Introduzca 9 caracteres" class="form-control" [(ngModel)]="newInvoice.supplier_cif"
+                required></td>
+        <td><input class="form-control" [(ngModel)]="newInvoice.supplier_name" required></td>
+        <td><input class="form-control" [(ngModel)]="newInvoice.supplier_address"></td>
+        <td><input class="form-control" [(ngModel)]="newInvoice.description"></td>
+        <td><input type="number" class="form-control" [(ngModel)]="newInvoice.amount"></td>
+        <td>
+            <input type="radio" value="true" [(ngModel)]="newInvoice.state">Yes<br>
+            <input type="radio" value="false" [(ngModel)]="newInvoice.state">No<br>
+        </td>
+        <!-- <td><input class="form-control" [(ngModel)]="newInvoice.state"></td> -->
+        <td><input class="form-control" [(ngModel)]="newInvoice.id_credit"></td>
+        <td><button class="btn btn-primary" (click)="addInvoice()">Add Invoice</button> </td>
+
+    </tr>
+
+
+    <tr *ngFor="let invoice of invoices" app-editable-invoice [invoice]="invoice">
+    </tr>
+
+    
 
 
 
-
-<tr *ngFor="let invoice of invoices" app-editable-invoice [invoice] = "invoice">
-</tr>    
 </table>
 
+<table class="table">
 
+    <thead>
+        <tr>
+            <th>IDProject</th>
+            <th>Title</th>
+            <th>Description</th>
+            <th>State</th>
+            <th>Budget</th>
+        </tr>
+    </thead>
+    <tr *ngFor="let proyect of proyects">
+        <td>{{proyect.id}}</td>
+        <td>{{proyect.titulo}}</td>
+        <td>{{proyect.descripcion}}</td>
+        <td>{{proyect.estado}}</td>
+        <td>{{proyect.presupuesto}}</td>
+
+
+    </tr>
+</table>

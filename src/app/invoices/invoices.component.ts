@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Invoice } from './invoice';
+import {Proyect} from '../proyects/proyect';
 import { InvoiceService} from '../invoice.service';
 
 @Component({
@@ -10,6 +11,7 @@ import { InvoiceService} from '../invoice.service';
 export class InvoicesComponent implements OnInit {
 
   invoices : Invoice[];
+  proyects : Proyect[];
   selectedInvoice : Invoice;
   newInvoice : Invoice = {
     id_invoice : null,
@@ -53,6 +55,13 @@ export class InvoicesComponent implements OnInit {
     
   }
 
+  getProyects() {
+    this.invoiceService.getProyects()
+    .subscribe((proyects) => {
+      this.proyects=proyects;
+    });
+  }
+
   onEdit(invoice: Invoice): void {
     this.selectedInvoice = invoice;
   }
@@ -65,7 +74,5 @@ export class InvoicesComponent implements OnInit {
   ngOnInit() {
     this.getInvoices();
   }
-
-
 
 }

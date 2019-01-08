@@ -147,7 +147,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "\r\n<td *ngIf=\"!editable\">{{invoice.id_invoice}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_project}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_cif}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_name}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_address}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.description}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.amount}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.state}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_credit}}</td>\r\n\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_invoice\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_project\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_cif\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_name\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_address\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.description\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.amount\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.state\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_credit\"/></td>\r\n\r\n\r\n<td><button class=\"btn\" (click)=\"onEdit()\">{{editable ? 'Save': 'Edit'}}</button></td>\r\n<td><button class=\"btn\" (click)=\"deleteInvoice()\">Delete</button></td>"
+module.exports = "\r\n<td *ngIf=\"!editable\">{{invoice.id_invoice}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_project}}</td>\r\n<td></td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_cif}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_name}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.supplier_address}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.description}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.amount}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.state}}</td>\r\n<td *ngIf=\"!editable\">{{invoice.id_credit}}</td>\r\n\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_invoice\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_project\"/></td>\r\n<td></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_cif\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_name\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.supplier_address\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.description\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.amount\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.state\"/></td>\r\n<td *ngIf=\"editable\"><input [(ngModel)]=\"invoice.id_credit\"/></td>\r\n\r\n\r\n<td><button class=\"btn\" (click)=\"onEdit()\">{{editable ? 'Save': 'Edit'}}</button></td>\r\n<td><button class=\"btn\" (click)=\"deleteInvoice()\">Delete</button></td>"
 
 /***/ }),
 
@@ -233,6 +233,7 @@ var InvoiceService = /** @class */ (function () {
     function InvoiceService(httpClient) {
         this.httpClient = httpClient;
         this.serveUrl = "/api/v1";
+        this.urlProyects = "http://fis2018-02.herokuapp.com/api/v1";
     }
     InvoiceService.prototype.log = function (message) {
         //this.messageService.add(`HeroService: ${message}`);
@@ -253,6 +254,11 @@ var InvoiceService = /** @class */ (function () {
     InvoiceService.prototype.getInvoices = function () {
         var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'apikey': '04c76028-84e9-4b54-83a4-740dde6d1da3' });
         var url = this.serveUrl + "/invoices";
+        return this.httpClient.get(url, { headers: headers });
+    };
+    InvoiceService.prototype.getProyects = function () {
+        var headers = new _angular_common_http__WEBPACK_IMPORTED_MODULE_2__["HttpHeaders"]({ 'apikey': '11165da8-c45d-4cb3-95c4-6fa13939f7a5' });
+        var url = this.urlProyects + "/proyects";
         return this.httpClient.get(url, { headers: headers });
     };
     InvoiceService.prototype.addInvoice = function (invoice) {
@@ -328,7 +334,7 @@ module.exports = "\n/*# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = "<div *ngIf=\"selectedInvoice\">\r\n  {{selectedInvoice.id_invoice}}\r\n</div>\r\n\r\n\r\n<table class=\"table\">\r\n  <thead>\r\n      <tr>\r\n          <th>Invoice</th>\r\n          <th>Project</th>\r\n          <th>Supplier CIF</th>\r\n          <th>Supplier Name</th>\r\n          <th>Supplier Address</th>\r\n          <th>Description</th>\r\n          <th>Amount</th>\r\n          <th>State</th>\r\n          <th>Credit</th>\r\n          <th>&nbsp;</th>\r\n          <th>&nbsp;</th>\r\n      </tr>\r\n  </thead>\r\n\r\n  <tr>\r\n    <td><input type=\"number\" required class=\"form-control\" [(ngModel)]=\"newInvoice.id_invoice\" required></td>\r\n    <td><input type=\"number\" class=\"form-control\" [(ngModel)]=\"newInvoice.id_project\"></td>\r\n    <td><input type=\"text\" maxlength=\"9\" placeholder=\"Introduzca 9 caracteres\" class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_cif\" required></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_name\" required></td>\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_address\"></td>\r\n    <td><input class=\"form-control\"  [(ngModel)]=\"newInvoice.description\"></td>\r\n    <td><input type=\"number\" class =\"form-control\" [(ngModel)]=\"newInvoice.amount\"></td>\r\n    <td>\r\n        <input type=\"radio\" value=\"true\" [(ngModel)]=\"newInvoice.state\">Yes<br>\r\n        <input type=\"radio\" value=\"false\" [(ngModel)]=\"newInvoice.state\">No<br>\r\n    </td>\r\n    <!-- <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.state\"></td> -->\r\n    <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_credit\"></td>\r\n    <td><button class=\"btn btn-primary\" (click)=\"addInvoice()\">Add Invoice</button> </td>\r\n</tr>  \r\n\r\n\r\n\r\n\r\n<tr *ngFor=\"let invoice of invoices\" app-editable-invoice [invoice] = \"invoice\">\r\n</tr>    \r\n</table>\r\n\r\n\r\n"
+module.exports = "<div *ngIf=\"selectedInvoice\">\r\n    {{selectedInvoice.id_invoice}}\r\n</div>\r\n\r\n\r\n<table class=\"table\">\r\n    <thead>\r\n        <tr>\r\n            <th>Invoice</th>\r\n            <th>Project</th>\r\n            <th>&nbsp;</th>\r\n            <th>Supplier CIF</th>\r\n            <th>Supplier Name</th>\r\n            <th>Supplier Address</th>\r\n            <th>Description</th>\r\n            <th>Amount</th>\r\n            <th>State</th>\r\n            <th>Credit</th>\r\n            <th>&nbsp;</th>\r\n        </tr>\r\n    </thead>\r\n\r\n    <tr>\r\n        <td><input type=\"number\" required class=\"form-control\" [(ngModel)]=\"newInvoice.id_invoice\" required></td>\r\n        <td><input type=\"number\" class=\"form-control\" [(ngModel)]=\"newInvoice.id_project\"></td>\r\n        <td><button class=\"btn btn-primary\" (click)=\"getProyects()\">Show Proyects</button> </td>\r\n        <td><input type=\"text\" maxlength=\"9\" placeholder=\"Introduzca 9 caracteres\" class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_cif\"\r\n                required></td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_name\" required></td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.supplier_address\"></td>\r\n        <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.description\"></td>\r\n        <td><input type=\"number\" class=\"form-control\" [(ngModel)]=\"newInvoice.amount\"></td>\r\n        <td>\r\n            <input type=\"radio\" value=\"true\" [(ngModel)]=\"newInvoice.state\">Yes<br>\r\n            <input type=\"radio\" value=\"false\" [(ngModel)]=\"newInvoice.state\">No<br>\r\n        </td>\r\n        <!-- <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.state\"></td> -->\r\n        <td><input class=\"form-control\" [(ngModel)]=\"newInvoice.id_credit\"></td>\r\n        <td><button class=\"btn btn-primary\" (click)=\"addInvoice()\">Add Invoice</button> </td>\r\n\r\n    </tr>\r\n\r\n\r\n    <tr *ngFor=\"let invoice of invoices\" app-editable-invoice [invoice]=\"invoice\">\r\n    </tr>\r\n\r\n    \r\n\r\n\r\n\r\n</table>\r\n\r\n<table class=\"table\">\r\n\r\n    <thead>\r\n        <tr>\r\n            <th>IDProject</th>\r\n            <th>Title</th>\r\n            <th>Description</th>\r\n            <th>State</th>\r\n            <th>Budget</th>\r\n        </tr>\r\n    </thead>\r\n    <tr *ngFor=\"let proyect of proyects\">\r\n        <td>{{proyect.id}}</td>\r\n        <td>{{proyect.titulo}}</td>\r\n        <td>{{proyect.descripcion}}</td>\r\n        <td>{{proyect.estado}}</td>\r\n        <td>{{proyect.presupuesto}}</td>\r\n\r\n\r\n    </tr>\r\n</table>"
 
 /***/ }),
 
@@ -385,6 +391,13 @@ var InvoicesComponent = /** @class */ (function () {
         this.invoiceService.getInvoices()
             .subscribe(function (invoices) {
             _this.invoices = invoices;
+        });
+    };
+    InvoicesComponent.prototype.getProyects = function () {
+        var _this = this;
+        this.invoiceService.getProyects()
+            .subscribe(function (proyects) {
+            _this.proyects = proyects;
         });
     };
     InvoicesComponent.prototype.onEdit = function (invoice) {

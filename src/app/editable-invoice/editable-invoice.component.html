@@ -1,6 +1,7 @@
 
 <td *ngIf="!editable">{{invoice.id_invoice}}</td>
 <td *ngIf="!editable">{{invoice.id_project}}</td>
+<td></td>
 <td *ngIf="!editable">{{invoice.supplier_cif}}</td>
 <td *ngIf="!editable">{{invoice.supplier_name}}</td>
 <td *ngIf="!editable">{{invoice.supplier_address}}</td>
@@ -11,6 +12,7 @@
 
 <td *ngIf="editable"><input [(ngModel)]="invoice.id_invoice"/></td>
 <td *ngIf="editable"><input [(ngModel)]="invoice.id_project"/></td>
+<td></td>
 <td *ngIf="editable"><input [(ngModel)]="invoice.supplier_cif"/></td>
 <td *ngIf="editable"><input [(ngModel)]="invoice.supplier_name"/></td>
 <td *ngIf="editable"><input [(ngModel)]="invoice.supplier_address"/></td>
