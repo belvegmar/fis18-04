@@ -2,7 +2,7 @@ var urljoin = require('url-join');
 var CommandFactory = require('hystrixjs').commandFactory;
 var request = require('request-promise-native').defaults({json: true});
 var invoicesServer = (process.env.INVOICES_URL || 'http://localhost:3000/api/v1');
-var invoicesKey = (process.env.INVOICES_APIKEY || '04c76028-84e9-4b54-83a4-740dde6d1da3');
+var invoicesKey = (process.env.INVOICES_APIKEY || 'f94bd67e-25f5-41b1-bcbd-70707225c9d4');
 
 function invoicesResource(url) {
     return urljoin(invoicesServer, url, '?apikey='+invoicesKey);

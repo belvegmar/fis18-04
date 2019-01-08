@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-//var bcrypt = require('bcrypt');
+var bcrypt = require('bcrypt-nodejs');
 var uuidv4 = require('uuid/v4');
 var SALT_WORK_FACTOR = 10;
 
@@ -9,7 +9,6 @@ var apiKeySchema = new mongoose.Schema({
     apikey: String
 });
 
-/*
 
 // Bcrypt middleware
 apiKeySchema.pre('save', function(next) {
@@ -21,7 +20,7 @@ apiKeySchema.pre('save', function(next) {
 	bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt) {
 		if(err) return next(err);
 
-		bcrypt.hash(user.password, salt, function(err, hash) {
+		bcrypt.hash(user.password, null, null, function(err, hash) {
 			if(err) return next(err);
             user.password = hash;
 			next();
@@ -36,7 +35,7 @@ apiKeySchema.methods.comparePassword = function(candidatePassword, cb) {
 		cb(null, isMatch);
 	});
 };
-*/
+
 var ApiKey = mongoose.model('ApiKey', apiKeySchema);
 
 module.exports = ApiKey;
