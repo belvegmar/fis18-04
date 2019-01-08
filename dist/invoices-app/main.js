@@ -186,6 +186,7 @@ var EditableInvoiceComponent = /** @class */ (function () {
     };
     EditableInvoiceComponent.prototype.deleteInvoice = function () {
         this.invoiceService.deleteInvoice(this.invoice).subscribe();
+        location.reload(true);
     };
     EditableInvoiceComponent.prototype.ngOnInit = function () {
     };
@@ -376,6 +377,7 @@ var InvoicesComponent = /** @class */ (function () {
             state: null,
             id_credit: null
         };
+        location.reload(true);
     };
     ;
     InvoicesComponent.prototype.getInvoices = function () {

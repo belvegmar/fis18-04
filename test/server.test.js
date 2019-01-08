@@ -4,10 +4,17 @@ var chaiHttp = require('chai-http');
 var expect = chai.expect;
 var sinon = require('sinon');
 var Invoice = require('../invoices');
+var ApiKey = require('../apikeys');
+
 
 chai.use(chaiHttp);
 
 describe('Contacts API', () => {
+    before(() => {
+        var ApiKeyStub = sinon.stub(ApiKey, 'findOne');
+        ApiKeyStub.yields(null, new ApiKey({ user: "test" }));
+    })
+
     it('hola mundo de prueba', (done) => {
         var x = 3;
         var y = 5;
@@ -38,14 +45,14 @@ describe('Contacts API', () => {
 
     describe('GET /invoices', () => {
         var invoice = new Invoice({
-            "id_invoice": 1, "id_project": 2, "supplier_cif": "abprueba", "supplier_name": "Mercadona",
-            "supplier_address": "Reina Mercedes", "description": "pruebatest", "amount": 100, " state": true,
-            "id_credit": 3
+            id_invoice: 5, "id_project": 5, supplier_cif: "pruebaIntegracion", supplier_name: "Aldi",
+            supplier_address: "Pescara", description: "pruebatest", amount: 100, state: true,
+            id_credit: 3
         });
         var invoiceMock = sinon.mock(invoice);
         invoiceMock.expects('cleanup').returns({
-            "id_invoice": 1, "id_project": 2, "supplier_cif": "abprueba", "supplier_name": "Mercadona",
-            "supplier_address": "Reina Mercedes", "description": "pruebatest", "amount": 100, " state": true,
+            "id_invoice": 5, "id_project": 5, "supplier_cif": "pruebaIntegracion", "supplier_name": "Aldi",
+            "supplier_address": "Pescara", "description": "pruebatest", "amount": 100, " state": true,
             "id_credit": 3
         });
 
@@ -54,7 +61,9 @@ describe('Contacts API', () => {
 
         it('Should return all invoices', (done) => {
             chai.request(server.app).get('/api/v1/invoices')
+                .query({ apikey: "test" })
                 .end((err, res) => {
+                    console.log(res.body);
                     expect(res).to.have.status(200);
                     expect(res.body).to.be.an('array');
                     expect(res.body).to.have.lengthOf(1);
@@ -73,7 +82,7 @@ describe('Contacts API', () => {
     //             "supplier_address": "Reina Mercedes", "description": "pruebatest", "amount": 100, " state": true,
     //             "id_credit": 3
     //         });               
-            
+
     //         var id_invoice = 1;
 
     //         chai.request(server.app).get('/api/v1/invoices' + id_invoice)
@@ -202,15 +211,5 @@ describe('Contacts API', () => {
                  });
          });
      }); */
-
-
-
-
-
-
-
-
-
-
 
 });

@@ -38,7 +38,9 @@ export class InvoicesComponent implements OnInit {
       amount : null,
       state : null,
       id_credit : null
-    }
+    };
+
+    location.reload(true);
 
     
   };
